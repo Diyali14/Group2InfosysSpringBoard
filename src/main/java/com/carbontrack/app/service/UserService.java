@@ -1,18 +1,15 @@
 package com.carbontrack.app.service;
 
-import com.carbontrack.app.entity.User;
+import com.carbontrack.app.dto.request.RegisterUserRequest;
+import com.carbontrack.app.dto.response.UserResponse;
 
 import java.util.List;
 
 public interface UserService {
 
-    User saveUser(User user);
+    UserResponse registerUser(RegisterUserRequest request);
 
-    List<User> getAllUsers();
+    UserResponse getUserByEmail(String email);
 
-    User getUserById(Long id);
-
-    User updateUser(Long id, User user);
-
-    void deleteUser(Long id);
+    List<UserResponse> getAllUsers();
 }

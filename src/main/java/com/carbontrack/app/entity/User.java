@@ -30,11 +30,17 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String role;
+
     @Column(name = "preferred_unit")
     private String preferredUnit;
 
     @Column(name = "goal_visibility")
     private Boolean goalVisibility;
+
+    @Column(name = "is_active")
+    private Boolean isActive;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;

@@ -1,45 +1,42 @@
 package com.carbontrack.app.controller;
 
-import com.carbontrack.app.entity.User;
+import com.carbontrack.app.dto.request.RegisterUserRequest;
+import com.carbontrack.app.dto.response.UserResponse;
 import com.carbontrack.app.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
+@Tag(
+        name = "User API",
+        description = "APIs for User Registration and User Management"
+)
 public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    @Operation(summary = "Register a new user")
+    @PostMapping("/register")
+    public UserResponse registerUser(@Valid @RequestBody RegisterUserRequest request) {
+        return userService.registerUser(request);
     }
 
-    @PostMapping
-    public User saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
-    }
-
+    @Operation(summary = "Get all registered users")
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
-    }
-
-    @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id,
-                           @RequestBody User user) {
-        return userService.updateUser(id, user);
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return "User deleted successfully.";
+    @Operation(summary = "Get user by email")
+    @GetMapping("/email/{email}")
+    public UserResponse getUserByEmail(@PathVariable String email) {
+        return userService.getUserByEmail(email);
     }
 }
