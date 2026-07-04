@@ -1,9 +1,16 @@
 package com.carbontrack.app.service.impl;
 
+import com.carbontrack.app.dto.UserResponse;
 import com.carbontrack.app.entity.User;
+import com.carbontrack.app.exception.ResourceNotFoundException;
+import com.carbontrack.app.mapper.UserMapper;
 import com.carbontrack.app.repository.UserRepository;
 import com.carbontrack.app.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import com.carbontrack.app.dto.CreateUserRequest;
+import com.carbontrack.app.dto.UpdateUserRequest;
+
 
 import java.util.List;
 
@@ -11,47 +18,80 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder) {
+
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public UserResponse saveUser(CreateUserRequest request) {
+
+        User user = User.builder()
+                .username(request.getUsername())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .preferredUnit(request.getPreferredUnit())
+                .goalVisibility(request.getGoalVisibility())
+                .provider("LOCAL")
+                .role("USER")
+                .build();
+
+        User savedUser = userRepository.save(user);
+
+        return UserMapper.toResponse(savedUser);
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponse> getAllUsers() {
+
+        return userRepository.findAll()
+                .stream()
+                .map(UserMapper::toResponse)
+                .toList();
     }
 
     @Override
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserResponse getUserById(Long id) {
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
+
+        return UserMapper.toResponse(user);
     }
 
     @Override
-    public User updateUser(Long id, User user) {
+    public UserResponse updateUser(Long id,
+                                   UpdateUserRequest request) {
 
-        User existingUser = userRepository.findById(id).orElse(null);
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
 
-        if (existingUser != null) {
-            existingUser.setFirstName(user.getFirstName());
-            existingUser.setLastName(user.getLastName());
-            existingUser.setEmail(user.getEmail());
-            existingUser.setPassword(user.getPassword());
-            existingUser.setPreferredUnit(user.getPreferredUnit());
-            existingUser.setGoalVisibility(user.getGoalVisibility());
+        existingUser.setFirstName(request.getFirstName());
+        existingUser.setLastName(request.getLastName());
+        existingUser.setEmail(request.getEmail());
+        existingUser.setPreferredUnit(request.getPreferredUnit());
+        existingUser.setGoalVisibility(request.getGoalVisibility());
 
-            return userRepository.save(existingUser);
-        }
+        User updatedUser = userRepository.save(existingUser);
 
-        return null;
+        return UserMapper.toResponse(updatedUser);
     }
 
     @Override
     public void deleteUser(Long id) {
+
+        if (!userRepository.existsById(id)) {
+            throw new ResourceNotFoundException("User not found");
+        }
+
         userRepository.deleteById(id);
     }
 }

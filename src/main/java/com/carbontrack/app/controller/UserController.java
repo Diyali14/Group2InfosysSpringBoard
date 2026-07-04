@@ -1,8 +1,12 @@
 package com.carbontrack.app.controller;
 
+import com.carbontrack.app.dto.CreateUserRequest;
+import com.carbontrack.app.dto.UpdateUserRequest;
 import com.carbontrack.app.entity.User;
 import com.carbontrack.app.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import com.carbontrack.app.dto.UserResponse;
 
 import java.util.List;
 
@@ -17,24 +21,28 @@ public class UserController {
     }
 
     @PostMapping
-    public User saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public UserResponse saveUser(
+            @Valid @RequestBody CreateUserRequest request) {
+
+        return userService.saveUser(request);
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserResponse> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable Long id) {
+    public UserResponse getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id,
-                           @RequestBody User user) {
-        return userService.updateUser(id, user);
+    public UserResponse updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateUserRequest request) {
+
+        return userService.updateUser(id, request);
     }
 
     @DeleteMapping("/{id}")

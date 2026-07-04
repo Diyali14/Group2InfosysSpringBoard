@@ -25,10 +25,16 @@ public class User {
     private String lastName;
 
     @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String password;
+
+    @Column(name = "provider")
+    private String provider; // LOCAL or GOOGLE
 
     @Column(name = "preferred_unit")
     private String preferredUnit;
@@ -41,4 +47,7 @@ public class User {
 
     @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updatedAt;
+
+    @Column(nullable = false)
+    private String role; // USER, ADMIN
 }
