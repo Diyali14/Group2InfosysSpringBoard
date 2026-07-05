@@ -1,62 +1,45 @@
 package com.carbontrack.app.service.impl;
 
-import com.carbontrack.app.dto.request.RegisterUserRequest;
-import com.carbontrack.app.dto.response.UserResponse;
+import com.carbontrack.app.dto.CreateUserRequest;
+import com.carbontrack.app.dto.UpdateUserRequest;
+import com.carbontrack.app.dto.UserResponse;
 import com.carbontrack.app.entity.User;
-import com.carbontrack.app.exception.DuplicateResourceException;
 import com.carbontrack.app.exception.ResourceNotFoundException;
+import com.carbontrack.app.mapper.UserMapper;
 import com.carbontrack.app.repository.UserRepository;
 import com.carbontrack.app.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserResponse registerUser(RegisterUserRequest request) {
-
-        // Check duplicate email
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new DuplicateResourceException(
-                    "User already exists with email: " + request.getEmail()
-            );
-        }
+    public UserResponse saveUser(CreateUserRequest request) {
 
         User user = User.builder()
+                .username(request.getUsername())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
-                .password(request.getPassword())
-
-                // Default values
+                .password(passwordEncoder.encode(request.getPassword()))
+                .preferredUnit(request.getPreferredUnit())
+                .goalVisibility(request.getGoalVisibility())
+                .provider("LOCAL")
                 .role("USER")
-                .preferredUnit("kgCO2e")
-                .goalVisibility(true)
                 .isActive(true)
-
                 .build();
 
         User savedUser = userRepository.save(user);
 
-        return mapToResponse(savedUser);
-    }
-
-    @Override
-    public UserResponse getUserByEmail(String email) {
-
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "User not found with email: " + email));
-
-        return mapToResponse(user);
+        return UserMapper.toResponse(savedUser);
     }
 
     @Override
@@ -64,17 +47,50 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.findAll()
                 .stream()
-                .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .map(UserMapper::toResponse)
+                .toList();
     }
 
-    private UserResponse mapToResponse(User user) {
+    @Override
+    public UserResponse getUserById(Long id) {
 
-        return UserResponse.builder()
-                .id(user.getId())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .email(user.getEmail())
-                .build();
+        User user = userRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
+
+        return UserMapper.toResponse(user);
+    }
+
+    @Override
+    public UserResponse updateUser(Long id,
+                                   UpdateUserRequest request) {
+
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
+
+        existingUser.setFirstName(request.getFirstName());
+        existingUser.setLastName(request.getLastName());
+
+
+        existingUser.setEmail(request.getEmail());
+
+        existingUser.setPreferredUnit(request.getPreferredUnit());
+        existingUser.setGoalVisibility(request.getGoalVisibility());
+
+
+        User updatedUser = userRepository.save(existingUser);
+
+        return UserMapper.toResponse(updatedUser);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+
+        if (!userRepository.existsById(id)) {
+            throw new ResourceNotFoundException("User not found");
+        }
+
+        userRepository.deleteById(id);
     }
 }

@@ -1,7 +1,8 @@
 package com.carbontrack.app.controller;
 
-import com.carbontrack.app.dto.request.RegisterUserRequest;
-import com.carbontrack.app.dto.response.UserResponse;
+import com.carbontrack.app.dto.CreateUserRequest;
+import com.carbontrack.app.dto.UpdateUserRequest;
+import com.carbontrack.app.dto.UserResponse;
 import com.carbontrack.app.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,27 +17,48 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(
         name = "User API",
-        description = "APIs for User Registration and User Management"
+        description = "APIs for User Management"
 )
 public class UserController {
 
     private final UserService userService;
 
-    @Operation(summary = "Register a new user")
-    @PostMapping("/register")
-    public UserResponse registerUser(@Valid @RequestBody RegisterUserRequest request) {
-        return userService.registerUser(request);
+    @Operation(summary = "Create a new user")
+    @PostMapping
+    public UserResponse saveUser(
+            @Valid @RequestBody CreateUserRequest request) {
+
+        return userService.saveUser(request);
     }
 
-    @Operation(summary = "Get all registered users")
+    @Operation(summary = "Get all users")
     @GetMapping
     public List<UserResponse> getAllUsers() {
+
         return userService.getAllUsers();
     }
 
-    @Operation(summary = "Get user by email")
-    @GetMapping("/email/{email}")
-    public UserResponse getUserByEmail(@PathVariable String email) {
-        return userService.getUserByEmail(email);
+    @Operation(summary = "Get user by ID")
+    @GetMapping("/{id}")
+    public UserResponse getUserById(@PathVariable Long id) {
+
+        return userService.getUserById(id);
+    }
+
+    @Operation(summary = "Update user")
+    @PutMapping("/{id}")
+    public UserResponse updateUser(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateUserRequest request) {
+
+        return userService.updateUser(id, request);
+    }
+
+    @Operation(summary = "Delete user")
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id) {
+
+        userService.deleteUser(id);
+        return "User deleted successfully.";
     }
 }
