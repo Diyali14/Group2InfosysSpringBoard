@@ -8,8 +8,12 @@ CREATE TABLE users (
                        first_name VARCHAR(100) NOT NULL,
                        last_name VARCHAR(100),
 
+                       username VARCHAR(100) NOT NULL UNIQUE,
+
                        email VARCHAR(150) NOT NULL UNIQUE,
                        password VARCHAR(255) NOT NULL,
+
+                       provider VARCHAR(20) DEFAULT 'LOCAL',
 
                        role VARCHAR(20) NOT NULL DEFAULT 'USER',
 
