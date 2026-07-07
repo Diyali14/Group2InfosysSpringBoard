@@ -1,16 +1,26 @@
+import { GoogleLogin } from '@react-oauth/google';
 import React, { useState } from 'react';
 
 export default function LandingPage({ setAuth }) {
     const [isLogin, setIsLogin] = useState(true);
-    const [email, setEmail] = useState('');
+    const [emailOrUsername, setEmailOrUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+
+    // ---- FRONTEND SIGNUP STATES ----
+    const [username, setUsername] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // For now, any input logs them in. Later you can hook this up to your database!
-        if (email && password) {
-            setAuth(true);
+        if (isLogin) {
+            if (emailOrUsername && password) {
+                setAuth(true);
+            }
+        } else {
+            if (username && firstName && lastName && emailOrUsername && password) {
+                setAuth(true);
+            }
         }
     };
 
@@ -46,28 +56,57 @@ export default function LandingPage({ setAuth }) {
                     </p>
 
                     <form onSubmit={handleSubmit} style={styles.form}>
+                        {/* ---- SHOWS ONLY ON SIGNUP / REGISTER CARD ---- */}
                         {!isLogin && (
-                            <div style={styles.inputGroup}>
-                                <label style={styles.label}>Full Name</label>
-                                <input
-                                    type="text"
-                                    placeholder="John Doe"
-                                    style={styles.input}
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    required
-                                />
-                            </div>
+                            <>
+                                <div style={styles.inputGroup}>
+                                    <label style={styles.label}>Username</label>
+                                    <input
+                                        type="text"
+                                        placeholder="chosen_username"
+                                        style={styles.input}
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        required
+                                    />
+                                </div>
+
+                                <div style={styles.inputGroup}>
+                                    <label style={styles.label}>First Name</label>
+                                    <input
+                                        type="text"
+                                        placeholder="First Name"
+                                        style={styles.input}
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        required
+                                    />
+                                </div>
+
+                                <div style={styles.inputGroup}>
+                                    <label style={styles.label}>Last Name</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Last Name"
+                                        style={styles.input}
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        required
+                                    />
+                                </div>
+                            </>
                         )}
 
                         <div style={styles.inputGroup}>
-                            <label style={styles.label}>Email Address</label>
+                            <label style={styles.label}>
+                                {isLogin ? 'Email Address or Username' : 'Email Address'}
+                            </label>
                             <input
-                                type="email"
-                                placeholder="you@example.com"
+                                type="text"
+                                placeholder={isLogin ? "you@example.com or xyz123" : "email@gmail.com"}
                                 style={styles.input}
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                value={emailOrUsername}
+                                onChange={(e) => setEmailOrUsername(e.target.value)}
                                 required
                             />
                         </div>
@@ -82,17 +121,52 @@ export default function LandingPage({ setAuth }) {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
+
+                            {/* ---- FORGOT PASSWORD LINK ---- */}
+                            {isLogin && (
+                                <div style={styles.forgotPasswordContainer}>
+                                    <button
+                                        type="button"
+                                        onClick={() => alert("Password reset link sent (Frontend Demo Mode)!")}
+                                        style={styles.forgotBtn}
+                                    >
+                                        Forgot Password?
+                                    </button>
+                                </div>
+                            )}
                         </div>
 
+                        {/* Traditional Submit Button */}
                         <button type="submit" style={styles.submitBtn}>
                             {isLogin ? 'Sign In to Dashboard' : 'Get Started Free'}
                         </button>
+
+                        {/* ---- VISUAL DIVIDER ---- */}
+                        <div style={styles.dividerContainer}>
+                            <div style={styles.line}></div>
+                            <span style={styles.dividerText}>or</span>
+                            <div style={styles.line}></div>
+                        </div>
+
+                        {/* ---- GOOGLE BUTTON ---- */}
+                        <div style={styles.googleBtnWrapper}>
+                            <GoogleLogin
+                                onSuccess={(credentialResponse) => {
+                                    console.log("Google JWT Token for Backend:", credentialResponse.credential);
+                                    setAuth(true);
+                                }}
+                                onError={() => {
+                                    console.log('Google Sign-In Failed');
+                                }}
+                                useOneTap
+                            />
+                        </div>
                     </form>
 
                     <div style={styles.toggleContainer}>
-            <span style={styles.toggleText}>
-              {isLogin ? "Don't have an account? " : "Already have an account? "}
-            </span>
+                        <span style={styles.toggleText}>
+                          {isLogin ? "Don't have an account? " : "Already have an account? "}
+                        </span>
                         <button onClick={() => setIsLogin(!isLogin)} style={styles.toggleBtn}>
                             {isLogin ? 'Register here' : 'Login here'}
                         </button>
@@ -106,7 +180,7 @@ export default function LandingPage({ setAuth }) {
 // Earthy, clean styles to match your dashboard palette
 const styles = {
     container: {
-        backgroundColor: '#edf1e4', // Matches your exact background
+        backgroundColor: '#edf1e4',
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
@@ -148,7 +222,7 @@ const styles = {
     },
     heroSection: {
         flex: '1 1 450px',
-        color: '#1e3f20', // Dark forest green
+        color: '#1e3f20',
     },
     badge: {
         display: 'inline-block',
@@ -263,4 +337,40 @@ const styles = {
         padding: '0',
         textDecoration: 'underline',
     },
+    dividerContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '10px 0',
+        gap: '10px',
+    },
+    line: {
+        flex: 1,
+        height: '1px',
+        backgroundColor: '#d1dbd2',
+    },
+    dividerText: {
+        fontSize: '0.85rem',
+        color: '#768c77',
+    },
+    googleBtnWrapper: {
+        display: 'flex',
+        justifyContent: 'center',
+        width: '100%',
+    },
+    forgotPasswordContainer: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginTop: '4px',
+    },
+    forgotBtn: {
+        background: 'none',
+        border: 'none',
+        color: '#3d7a42',
+        fontSize: '0.8rem',
+        fontWeight: '500',
+        cursor: 'pointer',
+        padding: '0',
+        textDecoration: 'none',
+    }
 };

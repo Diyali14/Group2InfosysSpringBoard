@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 /* ---------------------------------------------------------------- */
-/* Palette + type                                                    */
+/* Palette + typography styles                                      */
 /* ---------------------------------------------------------------- */
 const C = {
     paper: "#F6F4EC",
@@ -160,9 +160,9 @@ function Trend({ value }) {
     const color = flat ? C.subtext : good ? C.moss : C.danger;
     return (
         <span style={{ display: "inline-flex", alignItems: "center", gap: 4, color, fontFamily: MONO, fontSize: 12 }}>
-      <Icon size={13} strokeWidth={2.5} />
+            <Icon size={13} strokeWidth={2.5} />
             {Math.abs(value)}%
-    </span>
+        </span>
     );
 }
 
@@ -308,8 +308,8 @@ function ActivityLogger({ onLog }) {
             >
                 <span style={{ fontFamily: BODY, fontSize: 13, color: C.subtext }}>Estimated CO₂e</span>
                 <span style={{ fontFamily: MONO, fontSize: 20, fontWeight: 600, color: intensity }}>
-          {fmt1(preview)} <span style={{ fontSize: 12, fontWeight: 400 }}>kg</span>
-        </span>
+                    {fmt1(preview)} <span style={{ fontSize: 12, fontWeight: 400 }}>kg</span>
+                </span>
             </div>
 
             <button
@@ -335,7 +335,7 @@ function ActivityLogger({ onLog }) {
 
             {/* Quick-log carousel */}
             <div>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", justify盤ntent: "space-between", marginBottom: 10 }}>
                     <SectionLabel>Quick log</SectionLabel>
                     <div style={{ display: "flex", gap: 4 }}>
                         <button
@@ -528,8 +528,8 @@ function MonthlyProgress({ todayTotal }) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 14 }}>
                 <SectionLabel>Monthly budget</SectionLabel>
                 <span style={{ fontFamily: MONO, fontSize: 13, color: C.subtext }}>
-          <span style={{ color: over ? C.danger : C.ink, fontWeight: 600 }}>{fmt1(monthTotal)}</span> / {MONTHLY_TARGET} kg CO₂e
-        </span>
+                    <span style={{ color: over ? C.danger : C.ink, fontWeight: 600 }}>{fmt1(monthTotal)}</span> / {MONTHLY_TARGET} kg CO₂e
+                </span>
             </div>
             <div style={{ position: "relative", height: 14, background: C.paper, borderRadius: 999, border: `1px solid ${C.line}` }}>
                 <div
@@ -620,17 +620,17 @@ function Leaderboard({ youWeekly }) {
                                 border: isYou ? `1px solid ${C.moss}` : "1px solid transparent",
                             }}
                         >
-              <span
-                  style={{
-                      fontFamily: MONO,
-                      fontSize: 12,
-                      color: i < 3 ? C.moss : C.subtext,
-                      fontWeight: i < 3 ? 700 : 400,
-                      width: 20,
-                  }}
-              >
-                #{i + 1}
-              </span>
+                            <span
+                                style={{
+                                    fontFamily: MONO,
+                                    fontSize: 12,
+                                    color: i < 3 ? C.moss : C.subtext,
+                                    fontWeight: i < 3 ? 700 : 400,
+                                    width: 20,
+                                }}
+                            >
+                                #{i + 1}
+                            </span>
                             <div
                                 style={{
                                     width: 26,
@@ -649,8 +649,8 @@ function Leaderboard({ youWeekly }) {
                                 {p.name.split(" ").map((w) => w[0]).join("")}
                             </div>
                             <span style={{ fontFamily: BODY, fontSize: 13, fontWeight: isYou ? 700 : 500, color: C.ink, flex: 1 }}>
-                {p.name}
-              </span>
+                                {p.name}
+                            </span>
                             <span style={{ fontFamily: MONO, fontSize: 13, color: C.subtext }}>{fmt1(p.weekly)} kg</span>
                         </div>
                     );
@@ -696,33 +696,35 @@ function OrgReportView() {
                                 contentStyle={{ fontFamily: BODY, fontSize: 12, border: `1px solid ${C.line}`, borderRadius: 6 }}
                                 formatter={(v) => [`${fmt1(v)} kg`, "avg"]}
                             />
-                            <Bar dataKey="avg" radius={[4, 4, 0, 0]}>
-                                {DEPARTMENTS.map((d) => (
-                                    <Cell key={d.dept} fill={d.avg > teamAvg ? C.clay : C.moss} />
-                                ))}
-                            </Bar>
+                            <Bar dataKey="avg" fill={C.moss} radius={[4, 4, 0, 0]} />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
             </Card>
 
             <Card>
-                <SectionLabel>Team members</SectionLabel>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div style={{ display: "flex", padding: "6px 8px", fontFamily: MONO, fontSize: 11, color: C.subtext, textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                        <span style={{ flex: 2 }}>Name</span>
-                        <span style={{ flex: 1 }}>Department</span>
-                        <span style={{ flex: 1, textAlign: "right" }}>Weekly CO₂e</span>
-                        <span style={{ flex: 1, textAlign: "right" }}>Trend</span>
-                    </div>
-                    {TEAM_MEMBERS.map((m) => (
-                        <div key={m.name} style={{ display: "flex", alignItems: "center", padding: "10px 8px", borderTop: `1px solid ${C.line}` }}>
-                            <span style={{ flex: 2, fontFamily: BODY, fontSize: 13, color: C.ink, fontWeight: 500 }}>{m.name}</span>
-                            <span style={{ flex: 1, fontFamily: BODY, fontSize: 13, color: C.subtext }}>{m.dept}</span>
-                            <span style={{ flex: 1, textAlign: "right", fontFamily: MONO, fontSize: 13, color: C.ink }}>{fmt1(m.weekly)} kg</span>
-                            <span style={{ flex: 1, textAlign: "right" }}><Trend value={m.trend} /></span>
-                        </div>
-                    ))}
+                <SectionLabel>Team Roster & Sustainability Performance</SectionLabel>
+                <div style={{ overflowX: "auto" }}>
+                    <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: BODY, fontSize: 13 }}>
+                        <thead>
+                        <tr style={{ borderBottom: `1px solid ${C.line}`, textAlign: "left" }}>
+                            <th style={{ padding: "10px 8px", color: C.subtext, fontWeight: 600 }}>Name</th>
+                            <th style={{ padding: "10px 8px", color: C.subtext, fontWeight: 600 }}>Department</th>
+                            <th style={{ padding: "10px 8px", color: C.subtext, fontWeight: 600 }}>Weekly CO₂e</th>
+                            <th style={{ padding: "10px 8px", color: C.subtext, fontWeight: 600 }}>Weekly Change</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {TEAM_MEMBERS.map((m) => (
+                            <tr key={m.name} style={{ borderBottom: `1px solid ${C.paper}` }}>
+                                <td style={{ padding: "12px 8px", color: C.ink, fontWeight: 500 }}>{m.name}</td>
+                                <td style={{ padding: "12px 8px", color: C.charcoal }}>{m.dept}</td>
+                                <td style={{ padding: "12px 8px", fontFamily: MONO }}>{fmt1(m.weekly)} kg</td>
+                                <td style={{ padding: "12px 8px" }}><Trend value={m.trend} /></td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
             </Card>
         </div>
@@ -730,73 +732,238 @@ function OrgReportView() {
 }
 
 /* ---------------------------------------------------------------- */
-/* App                                                                */
+/* Primary Root Component Layout                                    */
 /* ---------------------------------------------------------------- */
-export default function Dashboard() {
-    const [view, setView] = useState("personal");
+export default function Dashboard({ setAuth }) {
+    const [view, setView] = useState("Personal"); // "Personal" or "Team"
     const [activities, setActivities] = useState(SEED_TODAY);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const todayTotal = activities.reduce((s, a) => s + a.co2e, 0);
+    const todayTotal = useMemo(() => activities.reduce((s, a) => s + a.co2e, 0), [activities]);
+    const youWeekly = useMemo(() => THIS_WEEK_SO_FAR.reduce((s, v) => s + v, 0) + todayTotal, [todayTotal]);
 
-    const handleLog = (entry) => setActivities((prev) => [...prev, entry]);
+    const handleLogActivity = (newAct) => {
+        setActivities((prev) => [newAct, ...prev]);
+    };
 
     return (
-        <div style={{ background: C.paper, minHeight: "100%", padding: "28px 32px", fontFamily: BODY }}>
-            {/* Header */}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 26, flexWrap: "wrap", gap: 12 }}>
-                <div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <Leaf size={20} color={C.moss} />
-                        <span style={{ fontFamily: DISPLAY, fontSize: 26, color: C.ink }}>Carbon Track</span>
-                    </div>
-                    <div style={{ fontFamily: BODY, fontSize: 13, color: C.subtext, marginTop: 2 }}>
-                        Track what you use. See what it costs the planet.
-                    </div>
+        <div style={styles.appContainer}>
+            {/* ---- MAIN TOP HEADER ---- */}
+            <header style={styles.header}>
+                <div style={styles.logoSection}>
+                    <Leaf size={22} color={C.moss} strokeWidth={2.5} />
+                    <h1 style={styles.logoText}>Carbon Track</h1>
                 </div>
-                <div style={{ display: "flex", gap: 6, background: C.card, border: `1px solid ${C.line}`, borderRadius: 999, padding: 4 }}>
-                    <button
-                        onClick={() => setView("personal")}
-                        style={{
-                            display: "flex", alignItems: "center", gap: 6,
-                            padding: "7px 14px", borderRadius: 999, border: "none", cursor: "pointer",
-                            fontFamily: BODY, fontSize: 13, fontWeight: 600,
-                            background: view === "personal" ? C.moss : "transparent",
-                            color: view === "personal" ? C.paper : C.subtext,
-                        }}
-                    >
-                        <Users size={14} /> Personal
-                    </button>
-                    <button
-                        onClick={() => setView("organization")}
-                        style={{
-                            display: "flex", alignItems: "center", gap: 6,
-                            padding: "7px 14px", borderRadius: 999, border: "none", cursor: "pointer",
-                            fontFamily: BODY, fontSize: 13, fontWeight: 600,
-                            background: view === "organization" ? C.moss : "transparent",
-                            color: view === "organization" ? C.paper : C.subtext,
-                        }}
-                    >
-                        <Building2 size={14} /> Team report
-                    </button>
-                </div>
-            </div>
 
-            {view === "personal" ? (
-                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                    <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr", gap: 20, alignItems: "start" }}>
-                        <ActivityLogger onLog={handleLog} />
-                        <TodaysFootprint activities={activities} />
+                <div style={styles.navActions}>
+                    {/* Perspective view toggles */}
+                    <button
+                        onClick={() => setView("Personal")}
+                        style={{
+                            ...styles.toggleBtn,
+                            background: view === "Personal" ? C.moss : "transparent",
+                            color: view === "Personal" ? C.paper : C.subtext,
+                            borderColor: view === "Personal" ? C.moss : C.line,
+                        }}
+                    >
+                        👤 Personal
+                    </button>
+                    <button
+                        onClick={() => setView("Team")}
+                        style={{
+                            ...styles.toggleBtn,
+                            background: view === "Team" ? C.moss : "transparent",
+                            color: view === "Team" ? C.paper : C.subtext,
+                            borderColor: view === "Team" ? C.line : C.line,
+                        }}
+                    >
+                        👥 Team report
+                    </button>
+
+                    {/* ---- FLOATING PROFILE AVATAR MENU ---- */}
+                    <div style={styles.profileContainer}>
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            style={styles.avatarCircle}
+                        >
+                            DR
+                        </button>
+
+                        {isMenuOpen && (
+                            <div style={styles.dropdownMenu}>
+                                <div style={styles.menuHeader}>
+                                    <p style={styles.menuName}>Diyali Roy</p>
+                                    <p style={styles.menuEmail}>diyali@gmail.com</p>
+                                </div>
+                                <hr style={styles.menuDivider} />
+                                <button style={styles.menuItem} onClick={() => setIsMenuOpen(false)}>⚙️ Account Settings</button>
+                                <button style={styles.menuItem} onClick={() => setIsMenuOpen(false)}>🍃 My Footprint Goals</button>
+                                <hr style={styles.menuDivider} />
+                                <button
+                                    onClick={() => {
+                                        setIsMenuOpen(false);
+                                        setAuth(false);
+                                    }}
+                                    style={{ ...styles.menuItem, ...styles.logoutItem }}
+                                >
+                                    🚪 Log Out
+                                </button>
+                            </div>
+                        )}
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                        <CategoryPie activities={activities} />
-                        <WeeklyTrend todayTotal={todayTotal} />
-                    </div>
-                    <MonthlyProgress todayTotal={todayTotal} />
-                    <Leaderboard youWeekly={THIS_WEEK_SO_FAR.reduce((s, v) => s + v, 0) + todayTotal} />
                 </div>
-            ) : (
-                <OrgReportView />
-            )}
+            </header>
+
+            {/* ---- VIEW CONDITIONAL CONTENT ROUTER ---- */}
+            <main style={styles.mainContent}>
+                {view === "Personal" ? (
+                    <div style={styles.dashboardGrid}>
+                        {/* Left column tools */}
+                        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                            <ActivityLogger onLog={handleLogActivity} />
+                            <MonthlyProgress todayTotal={todayTotal} />
+                        </div>
+
+                        {/* Right column visualization summaries */}
+                        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                                <TodaysFootprint activities={activities} />
+                                <CategoryPie activities={activities} />
+                            </div>
+                            <WeeklyTrend todayTotal={todayTotal} />
+                            <Leaderboard youWeekly={youWeekly} />
+                        </div>
+                    </div>
+                ) : (
+                    <OrgReportView />
+                )}
+            </main>
         </div>
     );
 }
+
+/* ---------------------------------------------------------------- */
+/* Shared Inline Sheet CSS Styles                                    */
+/* ---------------------------------------------------------------- */
+const styles = {
+    appContainer: {
+        backgroundColor: C.paper,
+        minHeight: "100vh",
+        color: C.ink,
+        fontFamily: BODY,
+    },
+    header: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "16px 32px",
+        background: C.card,
+        borderBottom: `1px solid ${C.line}`,
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+    },
+    logoSection: {
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+    },
+    logoText: {
+        fontFamily: DISPLAY,
+        fontSize: "1.4rem",
+        fontWeight: 700,
+        margin: 0,
+        color: C.ink,
+    },
+    navActions: {
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+    },
+    toggleBtn: {
+        fontFamily: BODY,
+        fontSize: 13,
+        fontWeight: 600,
+        padding: "8px 16px",
+        borderRadius: 20,
+        border: "1px solid",
+        cursor: "pointer",
+        transition: "all 0.15s ease",
+    },
+    profileContainer: {
+        position: "relative",
+    },
+    avatarCircle: {
+        width: "38px",
+        height: "38px",
+        borderRadius: "50%",
+        backgroundColor: C.moss,
+        color: "#ffffff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontWeight: "600",
+        fontSize: "0.9rem",
+        border: "none",
+        cursor: "pointer",
+        boxShadow: "0 2px 6px rgba(27,49,28,0.15)",
+    },
+    dropdownMenu: {
+        position: "absolute",
+        top: "48px",
+        right: "0",
+        backgroundColor: "#ffffff",
+        borderRadius: "12px",
+        boxShadow: "0 8px 24px rgba(27, 49, 28, 0.12)",
+        border: `1px solid ${C.line}`,
+        width: "220px",
+        padding: "8px 0",
+        zIndex: 1000,
+    },
+    menuHeader: {
+        padding: "12px 16px",
+    },
+    menuName: {
+        margin: "0",
+        fontWeight: "600",
+        fontSize: "0.95rem",
+        color: C.ink,
+    },
+    menuEmail: {
+        margin: "2px 0 0 0",
+        fontSize: "0.8rem",
+        color: C.subtext,
+    },
+    menuDivider: {
+        margin: "6px 0",
+        border: "none",
+        borderTop: `1px solid ${C.paper}`,
+    },
+    menuItem: {
+        display: "block",
+        width: "100%",
+        padding: "10px 16px",
+        textAlign: "left",
+        background: "none",
+        border: "none",
+        fontSize: "0.88rem",
+        color: C.charcoal,
+        cursor: "pointer",
+        transition: "background-color 0.15s ease",
+    },
+    logoutItem: {
+        color: C.danger,
+        fontWeight: "600",
+    },
+    mainContent: {
+        padding: "32px",
+        maxWidth: "1300px",
+        margin: "0 auto",
+    },
+    dashboardGrid: {
+        display: "grid",
+        gridTemplateColumns: "380px 1fr",
+        gap: "24px",
+        alignItems: "start",
+    },
+};
