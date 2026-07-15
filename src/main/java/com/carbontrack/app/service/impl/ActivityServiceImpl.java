@@ -13,6 +13,9 @@ import com.carbontrack.app.service.ActivityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +28,12 @@ public class ActivityServiceImpl implements ActivityService {
     private final UserRepository userRepository;
 
     @Override
+    @Caching(evict = {
+            @CacheEvict(value = "dailyEmission", key = "#request.userId"),
+            @CacheEvict(value = "weeklyEmission", key = "#request.userId"),
+            @CacheEvict(value = "monthlyEmission", key = "#request.userId"),
+            @CacheEvict(value = "categoryEmission", key = "#request.userId")
+    })
     public ActivityResponse addActivity(ActivityRequest request) {
 
         User user = userRepository.findById(request.getUserId())

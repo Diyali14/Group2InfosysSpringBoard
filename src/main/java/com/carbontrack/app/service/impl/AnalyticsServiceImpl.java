@@ -6,6 +6,9 @@ import com.carbontrack.app.service.AnalyticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import org.springframework.cache.annotation.Cacheable;
+
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,6 +19,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
 
     private final ActivityLogRepository activityLogRepository;
     @Override
+    @Cacheable(value = "dailyEmission", key = "#userId")
     public Double getDailyEmission(Long userId) {
 
         LocalDate today = LocalDate.now();
@@ -25,6 +29,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
     }
 
     @Override
+    @Cacheable(value = "weeklyEmission", key = "#userId")
     public Double getWeeklyEmission(Long userId) {
 
         LocalDate today = LocalDate.now();
@@ -41,6 +46,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
     }
 
     @Override
+    @Cacheable(value = "monthlyEmission", key = "#userId")
     public Double getMonthlyEmission(Long userId) {
 
         LocalDate today = LocalDate.now();
@@ -57,6 +63,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
     }
 
     @Override
+    @Cacheable(value = "categoryEmission", key = "#userId")
     public List<CategoryEmissionResponse> getCategoryWiseEmission(Long userId) {
 
         LocalDate today = LocalDate.now();
