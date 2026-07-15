@@ -18,6 +18,7 @@ import java.util.List;
         name = "Activity API",
         description = "APIs for Managing User Activities"
 )
+@CrossOrigin(origins = "http://localhost:5173")
 public class ActivityController {
 
     private final ActivityService activityService;

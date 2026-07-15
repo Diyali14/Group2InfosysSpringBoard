@@ -5,9 +5,11 @@ import com.carbontrack.app.dto.LoginRequest;
 import com.carbontrack.app.dto.SignupRequest;
 import com.carbontrack.app.service.AuthService;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:5173")
 public class AuthController {
 
     private final AuthService authService;
