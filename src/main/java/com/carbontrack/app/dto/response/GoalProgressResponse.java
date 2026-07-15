@@ -3,13 +3,11 @@ package com.carbontrack.app.dto.response;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
-public class GoalResponse {
+public class GoalProgressResponse {
 
-    private Long id;
+    private Long goalId;
 
     private Double targetCo2e;
 
@@ -18,10 +16,6 @@ public class GoalResponse {
     private Double currentProgress;
 
     private Boolean onTrack;
-
-    private LocalDate startDate;
-
-    private LocalDate endDate;
 
     private String status;
 }
