@@ -8,6 +8,7 @@ import com.carbontrack.app.service.PromptBuilder;
 import com.carbontrack.app.service.RecommendationService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ public class RecommendationServiceImpl implements RecommendationService {
     private final ObjectMapper objectMapper;
 
     @Override
+    @Cacheable(value = "weeklyRecommendations", key = "#userId")
     public RecommendationResponse generateRecommendations(Long userId) {
 
         LocalDate endDate = LocalDate.now();

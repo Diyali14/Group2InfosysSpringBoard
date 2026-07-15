@@ -32,7 +32,8 @@ public class ActivityServiceImpl implements ActivityService {
             @CacheEvict(value = "dailyEmission", key = "#request.userId"),
             @CacheEvict(value = "weeklyEmission", key = "#request.userId"),
             @CacheEvict(value = "monthlyEmission", key = "#request.userId"),
-            @CacheEvict(value = "categoryEmission", key = "#request.userId")
+            @CacheEvict(value = "categoryEmission", key = "#request.userId"),
+            @CacheEvict(value = "weeklyRecommendations", key = "#request.userId")
     })
     public ActivityResponse addActivity(ActivityRequest request) {
 
