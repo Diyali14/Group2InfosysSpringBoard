@@ -24,7 +24,7 @@ public class RecommendationServiceImpl implements RecommendationService {
     private final ObjectMapper objectMapper;
 
     @Override
-    @Cacheable(value = "weeklyRecommendations", key = "#userId")
+    //@Cacheable(value = "weeklyRecommendations", key = "#userId")
     public RecommendationResponse generateRecommendations(Long userId) {
 
         LocalDate endDate = LocalDate.now();
