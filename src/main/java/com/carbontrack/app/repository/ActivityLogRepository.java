@@ -2,7 +2,7 @@ package com.carbontrack.app.repository;
 
 import com.carbontrack.app.entity.ActivityLog;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import com.carbontrack.app.dto.response.ActivityEmissionSummary;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -58,4 +58,23 @@ ORDER BY SUM(a.co2e) DESC
             @Param("endDate") LocalDate endDate
     );
 
+    @Query("""
+SELECT new com.carbontrack.app.dto.response.ActivityEmissionSummary(
+    a.category,
+    a.activityType,
+    SUM(a.co2e),
+    COUNT(a),
+    SUM(a.quantity)
+)
+FROM ActivityLog a
+WHERE a.user.id = :userId
+AND a.logDate BETWEEN :startDate AND :endDate
+GROUP BY a.category, a.activityType
+ORDER BY SUM(a.co2e) DESC
+""")
+    List<ActivityEmissionSummary> getActivityEmissionSummary(
+            @Param("userId") Long userId,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate
+    );
 }
