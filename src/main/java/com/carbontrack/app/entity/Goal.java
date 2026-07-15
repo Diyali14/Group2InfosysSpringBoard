@@ -36,4 +36,13 @@ public class Goal {
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @Column(name = "target_reduction_percentage")
+    private Double targetReductionPercentage;
+
+    @Column(name = "current_progress")
+    private Double currentProgress;
+
+    @Column(name = "on_track")
+    private Boolean onTrack;
 }
