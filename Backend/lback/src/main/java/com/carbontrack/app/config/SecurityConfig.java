@@ -43,11 +43,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                // 1. Integrates CORS with our backend filter configurations safely
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
+                        // Public Endpoints (Auth + Swagger)
+                        .requestMatchers(
+                                "/auth/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -60,7 +65,6 @@ public class SecurityConfig {
                         oauth.successHandler(successHandler)
                 )
                 .authenticationProvider(authenticationProvider())
-                // 2. Adds the JWT token security validator once cleanly at the end
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -74,7 +78,6 @@ public class SecurityConfig {
         return provider;
     }
 
-    // 3. New CORS helper bean to handle safe browser requests from port 5173
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
