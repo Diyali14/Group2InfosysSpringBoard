@@ -12,7 +12,7 @@ import {
     CheckCircle2, Circle, ArrowRight, Award, Lock, Shield, Globe2,
     Target, Sparkles, Calendar, MessageSquare, X, Send, AlertCircle, RotateCcw,
     Settings as SettingsIcon, LogOut, Pencil, Download,
-    Crown, Bike, TrainFront, Droplet, TreePine, Star,
+    Crown, Bike, TrainFront, Droplet, TreePine, Star, Lightbulb, Flag, Network,
 } from "lucide-react";
 
 /* ---------------------------------------------------------------- */
@@ -324,13 +324,13 @@ const MONTHLY_TARGET = 250;
 const MONTHLY_BEFORE_TODAY = 168.4;
 
 const LEADERBOARD = [
-    { name: "Priya N.", weekly: 21.3 },
+    { name: "Diyali N.", weekly: 21.3 },
     { name: "You", weekly: null },
-    { name: "Marcus O.", weekly: 24.8 },
+    { name: "Tanuja O.", weekly: 24.8 },
     { name: "Elena V.", weekly: 27.1 },
     { name: "Dev K.", weekly: 31.5 },
     { name: "Sam T.", weekly: 35.9 },
-    { name: "Ana R.", weekly: 40.2 },
+    { name: "Swathi R.", weekly: 40.2 },
 ];
 
 const DEPARTMENTS = [
@@ -345,33 +345,33 @@ const DEPARTMENTS = [
 /* Multi-tenancy — every org-scoped query filters on orgId           */
 /* ---------------------------------------------------------------- */
 const ORGS = [
-    { id: "org_northwind", name: "Northwind Labs", plan: "Business" },
     { id: "org_verdant", name: "Infosys SpringBoard", plan: "Tech" },
+    { id: "org_northwind", name: "Northwind Labs", plan: "Business" },
 ];
 const DEFAULT_ORG_ID = ORGS[0].id;
 
 const TEAM_MEMBERS = [
-    { id: "u_priya", orgId: "org_northwind", name: "Priya N.", dept: "Design", weekly: 21.3, trend: -6, targetWeekly: 24, goalPct: 92, lastActive: "2h ago" },
-    { id: "u_marcus", orgId: "org_northwind", name: "Marcus O.", dept: "Engineering", weekly: 24.8, trend: -2, targetWeekly: 26, goalPct: 74, lastActive: "5h ago" },
-    { id: "u_elena", orgId: "org_northwind", name: "Elena V.", dept: "Engineering", weekly: 27.1, trend: 3, targetWeekly: 25, goalPct: 48, lastActive: "1d ago" },
+    { id: "u_Diyali", orgId: "org_northwind", name: "Diyali Mukherjee", dept: "Design", weekly: 21.3, trend: -6, targetWeekly: 24, goalPct: 92, lastActive: "2h ago" },
+    { id: "u_Tanuja", orgId: "org_northwind", name: "Tanuja O.", dept: "Engineering", weekly: 24.8, trend: -2, targetWeekly: 26, goalPct: 74, lastActive: "5h ago" },
+    { id: "u_elena", orgId: "org_northwind", name: "Tanuja Waware", dept: "Engineering", weekly: 27.1, trend: 3, targetWeekly: 25, goalPct: 48, lastActive: "1d ago" },
     { id: "u_dev", orgId: "org_northwind", name: "Dev K.", dept: "Operations", weekly: 31.5, trend: 1, targetWeekly: 30, goalPct: 61, lastActive: "3h ago" },
     { id: "u_sam", orgId: "org_verdant", name: "Sam T.", dept: "Sales", weekly: 35.9, trend: 8, targetWeekly: 30, goalPct: 22, lastActive: "2d ago" },
-    { id: "u_ana", orgId: "org_verdant", name: "Ana R.", dept: "Sales", weekly: 40.2, trend: 5, targetWeekly: 34, goalPct: 35, lastActive: "6h ago" },
+    { id: "u_Swathi", orgId: "org_verdant", name: "Swathi R.", dept: "Sales", weekly: 40.2, trend: 5, targetWeekly: 34, goalPct: 35, lastActive: "6h ago" },
 ];
 
 /* Org-scoped selectors — never read the raw arrays in a view */
 const membersForOrg = (orgId) => TEAM_MEMBERS.filter((m) => m.orgId === orgId);
 
 const ORG_ACTIVITY_LOG = [
-    { id: "l1", orgId: "org_northwind", user: "Priya N.", category: "Transport", activityType: "Train", quantity: 24, unit: "km", co2e: 0.98, when: "Today · 09:12", onGoal: true },
-    { id: "l2", orgId: "org_northwind", user: "Marcus O.", category: "Energy", activityType: "Grid electricity", quantity: 11, unit: "kWh", co2e: 2.56, when: "Today · 08:40", onGoal: true },
+    { id: "l1", orgId: "org_northwind", user: "Diyali N.", category: "Transport", activityType: "Train", quantity: 24, unit: "km", co2e: 0.98, when: "Today · 09:12", onGoal: true },
+    { id: "l2", orgId: "org_northwind", user: "Tanuja O.", category: "Energy", activityType: "Grid electricity", quantity: 11, unit: "kWh", co2e: 2.56, when: "Today · 08:40", onGoal: true },
     { id: "l3", orgId: "org_northwind", user: "Elena V.", category: "Food", activityType: "Beef meal", quantity: 1, unit: "serving", co2e: 6.61, when: "Today · 13:05", onGoal: false },
     { id: "l4", orgId: "org_northwind", user: "Dev K.", category: "Transport", activityType: "Car (petrol)", quantity: 32, unit: "km", co2e: 6.14, when: "Yesterday · 18:22", onGoal: false },
-    { id: "l5", orgId: "org_northwind", user: "Priya N.", category: "Waste", activityType: "Recycled waste", quantity: 3, unit: "kg", co2e: 0.06, when: "Yesterday · 17:00", onGoal: true },
-    { id: "l6", orgId: "org_northwind", user: "Marcus O.", category: "Food", activityType: "Vegetarian meal", quantity: 2, unit: "serving", co2e: 1.02, when: "Yesterday · 12:30", onGoal: true },
+    { id: "l5", orgId: "org_northwind", user: "Diyali N.", category: "Waste", activityType: "Recycled waste", quantity: 3, unit: "kg", co2e: 0.06, when: "Yesterday · 17:00", onGoal: true },
+    { id: "l6", orgId: "org_northwind", user: "Tanuja O.", category: "Food", activityType: "Vegetarian meal", quantity: 2, unit: "serving", co2e: 1.02, when: "Yesterday · 12:30", onGoal: true },
     { id: "l7", orgId: "org_verdant", user: "Sam T.", category: "Transport", activityType: "Flight (short-haul)", quantity: 420, unit: "km", co2e: 107.1, when: "Today · 07:15", onGoal: false },
-    { id: "l8", orgId: "org_verdant", user: "Ana R.", category: "Energy", activityType: "Natural gas", quantity: 14, unit: "kWh", co2e: 2.58, when: "Today · 10:48", onGoal: true },
-    { id: "l9", orgId: "org_verdant", user: "Ana R.", category: "Waste", activityType: "Landfill waste", quantity: 4, unit: "kg", co2e: 2.32, when: "Yesterday · 20:10", onGoal: false },
+    { id: "l8", orgId: "org_verdant", user: "Swathi R.", category: "Energy", activityType: "Natural gas", quantity: 14, unit: "kWh", co2e: 2.58, when: "Today · 10:48", onGoal: true },
+    { id: "l9", orgId: "org_verdant", user: "Swathi R.", category: "Waste", activityType: "Landfill waste", quantity: 4, unit: "kg", co2e: 2.32, when: "Yesterday · 20:10", onGoal: false },
 ];
 const logsForOrg = (orgId) => ORG_ACTIVITY_LOG.filter((l) => l.orgId === orgId);
 
@@ -405,12 +405,12 @@ const BADGES = [
 ];
 
 const MOCK_MEMBER_BADGES = {
-    "Priya N.": ["streak_7", "reduction_10"],
-    "Marcus O.": ["reduction_10"],
+    "Diyali N.": ["streak_7", "reduction_10"],
+    "Tanuja ": ["reduction_10"],
     "Elena V.": ["first_goal"],
     "Dev K.": ["streak_7", "first_goal", "reduction_25"],
     "Sam T.": ["reduction_10", "reduction_25", "reduction_50"],
-    "Ana R.": ["first_goal", "reduction_10"]
+    "Swathi R.": ["first_goal", "reduction_10"]
 };
 
 const fmt1 = (n) => (Math.round(n * 10) / 10).toFixed(1);
@@ -463,14 +463,31 @@ function SproutMascot({ size = 32 }) {
 /* ---------------------------------------------------------------- */
 /* Sprout 🌱 Responsive AI Chatbot Component                        */
 /* ---------------------------------------------------------------- */
-const Tech_PROMPTS = [
-    "How's my footprint trending this week?",
-    "Tips to cut my transport emissions",
-    "Am I on track for my active reduction goal?",
-    "Suggest a quick eco-friendly swap for today"
+const QUICK_PROMPTS = [
+    { emoji: "🌱", text: "How can I lower my food footprint today?" },
+    { emoji: "⚡", text: "Tips to cut home electricity usage" },
+    { emoji: "📊", text: "Analyze my logging streak" },
+    { emoji: "🎯", text: "Suggest a new daily quest" },
 ];
 
-function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
+/* Soft sage / moss bubble palette (fixed, high-contrast) */
+const CHAT_C = {
+    sproutBg: "#F2F6F3",
+    sproutBorder: "rgba(30,74,44,0.10)",
+    sproutText: "#1B2B22",
+    userBg: "#1E4A2C",
+    userText: "#FFFFFF",
+};
+
+const pick = (arr, avoid) => {
+    const pool = arr.filter((s) => s !== avoid);
+    const list = pool.length ? pool : arr;
+    return list[Math.floor(Math.random() * list.length)];
+};
+
+
+function SproutChat({ allEntries, todayTotal, goal, youWeekly, activeStreak = 6, userName, onNavigate, onAddQuest }) {
+    const username = userName || "there";
     const T = useTheme();
     const [isOpen, setIsOpen] = useState(false);
     const [input, setInput] = useState("");
@@ -523,6 +540,105 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
         };
     };
 
+    /* Humanized, context-aware local reply composer.
+       Never repeats the exact previous Sprout message back-to-back. */
+    const composeReply = (query, ctx) => {
+        const q = query.toLowerCase();
+        const prev = [...messages].reverse().find((m) => m.sender === "sprout")?.text;
+        const loggedToday = ctx.todayTotalKg;
+        const loggedTravelToday = allEntries.some(
+            (e) => e.date === TODAY_STR && e.category === "Transport"
+        );
+
+        if (/^(hi|hey|hello|yo|hola|good morning|good evening)\b/.test(q.trim())) {
+            const text = pick([
+                `Hey ${username}! Ready to keep your ${activeStreak}-day streak alive today? You're at ${loggedToday} kg CO₂e so far.`,
+                `Hi ${username} 🌱 ${activeStreak} days logged in a row — nice rhythm. Want a quick win for today?`,
+                `Hello ${username}! Streak: ${activeStreak} days. Today's footprint so far is ${loggedToday} kg CO₂e.`,
+            ], prev);
+            return loggedTravelToday
+                ? { text }
+                : { text: `${text}\nLooks like you haven't logged travel today.`, action: { kind: "log", label: "🚗 Log Commute Now" } };
+        }
+
+        if (q.includes("food") || q.includes("meal") || q.includes("diet")) {
+            return {
+                text: pick([
+                    "Swap one beef meal for lentils or chicken today — that's about 4.2 kg CO₂e saved.\nBatch-cook it tonight so tomorrow's lunch is sorted too.",
+                    "Plant-forward lunch beats a beef lunch by roughly 3.8 kg CO₂e.\nAim for two meat-free days this week and you'll shave ~8 kg.",
+                ], prev),
+                action: { kind: "quest", label: "＋ Add to Today's Quests", quest: "Eat one plant-based meal today" },
+            };
+        }
+
+        if (q.includes("electric") || q.includes("energy") || q.includes("ac") || q.includes("home")) {
+            return {
+                text: pick([
+                    "Switching off the AC for 1 hour saves about 0.8 kg CO₂e.\nNudge the thermostat 1°C warmer — you likely won't notice it.",
+                    "Unplugging idle chargers and the TV standby draw trims ~0.3 kg CO₂e a day.\nRun laundry at 30°C to save another 0.6 kg per load.",
+                ], prev),
+                action: { kind: "quest", label: "＋ Add to Today's Quests", quest: "Cut 1 hour of AC / heating today" },
+            };
+        }
+
+        if (q.includes("streak") || q.includes("log")) {
+            return {
+                text: pick([
+                    `You're on a ${activeStreak}-day logging streak with ${loggedToday} kg CO₂e today.\nOne more entry keeps it alive — 30 seconds, tops.`,
+                    `${activeStreak} days straight, and this week totals ${ctx.thisWeekTotalKg} kg CO₂e.\nConsistency beats perfection — log something small now.`,
+                ], prev),
+                action: { kind: "log", label: "🚗 Log Commute Now" },
+            };
+        }
+
+        if (q.includes("quest") || q.includes("challenge")) {
+            const idea = pick([
+                "Walk or cycle one trip under 2 km today (~0.5 kg CO₂e saved).",
+                "Take a 5-minute shorter shower today (~0.4 kg CO₂e saved).",
+                "Bring a reusable cup for every drink today (~0.2 kg CO₂e saved).",
+            ]);
+            return {
+                text: `Here's a fresh quest for you:\n${idea}`,
+                action: { kind: "quest", label: "＋ Add to Today's Quests", quest: idea.replace(/\s*\(.*\)\.?$/, "") },
+            };
+        }
+
+        if (q.includes("transport") || q.includes("travel") || q.includes("commute") || q.includes("car")) {
+            return {
+                text: pick([
+                    `Transport is your heaviest bucket — swapping 2 car trips for transit cuts ~${fmt1(todayTotal * 0.4)} kg CO₂e.\nCombine errands into one loop to save even more.`,
+                    "One car-free commute a day is roughly 2.6 kg CO₂e off your week.\nTry it tomorrow morning and log it to see the dip.",
+                ], prev),
+                action: { kind: "log", label: "🚗 Log Commute Now" },
+            };
+        }
+
+        if (q.includes("trend") || q.includes("week")) {
+            return {
+                text: pick([
+                    `This week sits at ${ctx.thisWeekTotalKg} kg CO₂e, with ${loggedToday} kg today.\nKeep daily entries under 8 kg and the trend keeps sloping down.`,
+                    `Week total: ${ctx.thisWeekTotalKg} kg CO₂e. Today: ${loggedToday} kg.\nYour biggest lever right now is transport — worth a look in Trends.`,
+                ], prev),
+            };
+        }
+
+        if (q.includes("goal")) {
+            return {
+                text: goal
+                    ? `Your goal is a ${goal.targetPct}% cut (${ctx.activeGoal.targetWeeklyKg} kg/wk target).\nYou're at ${ctx.thisWeekTotalKg} kg this week — keep logging to stay honest.`
+                    : "You don't have an active goal yet.\nA 10% weekly cut is a realistic first target — set it in the Goals tab.",
+            };
+        }
+
+        return {
+            text: pick([
+                `You're at ${loggedToday} kg CO₂e today against an 8.2 kg daily average.\nSmall swaps in energy and food compound fast — want a quest?`,
+                "Happy to dig in! Ask me about food, electricity, travel or your streak.\nI'll keep the advice short and numbered.",
+                `This week: ${ctx.thisWeekTotalKg} kg CO₂e. Tell me which area you want to trim and I'll give you two quick moves.`,
+            ], prev),
+        };
+    };
+
     const handleSend = async (textToSend) => {
         const query = textToSend || input;
         if (!query.trim() || isLoading) return;
@@ -541,6 +657,7 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
         setError(null);
 
         const contextPayload = buildContextPayload();
+        const local = composeReply(query, contextPayload);
 
         try {
             /*
@@ -561,7 +678,7 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
             }
 
             const data = await response.json();
-            const sproutReply = data.reply || data.message || "I processed your request!";
+            const sproutReply = data.reply || data.message || local.text;
 
             setMessages(prev => [
                 ...prev,
@@ -569,6 +686,7 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
                     id: Date.now() + 1,
                     sender: "sprout",
                     text: sproutReply,
+                    action: local.action,
                     timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                 }
             ]);
@@ -577,33 +695,36 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
 
             // Fallback response simulating API answer if route is offline
             setTimeout(() => {
-                let reply = `Based on your context (${contextPayload.todayTotalKg} kg CO₂e logged today), `;
-                if (query.toLowerCase().includes("trend")) {
-                    reply += `your week total stands at ${contextPayload.thisWeekTotalKg} kg. You are doing well maintaining balance!`;
-                } else if (query.toLowerCase().includes("transport") || query.toLowerCase().includes("tips")) {
-                    reply += `your top emitters show high transport output. Swapping 2 car trips for public transit or walking will cut ~${fmt1(todayTotal * 0.4)} kg CO₂e.`;
-                } else if (query.toLowerCase().includes("goal")) {
-                    reply += goal ? `your goal is a ${goal.targetPct}% reduction (${contextPayload.activeGoal.targetWeeklyKg} kg/wk target). Keep logging to stay on track!` : "you don't have an active goal yet. Head to the 'Goals' tab to set one!";
-                } else {
-                    reply += "small daily switches in energy and dietary habits create substantial long-term reduction!";
-                }
-
                 setMessages(prev => [
                     ...prev,
                     {
                         id: Date.now() + 1,
                         sender: "sprout",
-                        text: reply,
+                        text: local.text,
+                        action: local.action,
                         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                     }
                 ]);
                 setIsLoading(false);
-            }, 800);
+            }, 750);
             return;
         } finally {
             setIsLoading(false);
         }
     };
+
+    const runAction = (msg) => {
+        const a = msg.action;
+        if (!a) return;
+        if (a.kind === "quest") {
+            onAddQuest?.(a.quest);
+            setMessages(prev => prev.map(m => (m.id === msg.id ? { ...m, actionDone: true } : m)));
+        } else if (a.kind === "log") {
+            onNavigate?.("log");
+            setIsOpen(false);
+        }
+    };
+
 
     const handleResetHistory = () => {
         const initial = [
@@ -650,6 +771,25 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
                         z-index: 10000;
                     }
                 }
+                /* Hidden / ultra-thin scrollbars inside the chat */
+                .sprout-chat-body {
+                    overflow-y: auto;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                }
+                .sprout-chat-body::-webkit-scrollbar { width: 0; height: 0; }
+                .sprout-chips {
+                    display: flex;
+                    gap: 6px;
+                    overflow-x: auto;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                }
+                .sprout-chips::-webkit-scrollbar { display: none; }
+                .sprout-chip { transition: transform .15s ease, background .15s ease; }
+                .sprout-chip:hover { transform: translateY(-1px); }
+                .sprout-action-btn { transition: filter .15s ease, transform .15s ease; }
+                .sprout-action-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
                 .sprout-fab {
                     position: fixed;
                     bottom: 24px;
@@ -768,10 +908,9 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
                     )}
 
                     {/* Messages Body */}
-                    <div style={{
+                    <div className="sprout-chat-body" style={{
                         flex: 1,
                         padding: 16,
-                        overflowY: "auto",
                         display: "flex",
                         flexDirection: "column",
                         gap: 12,
@@ -798,20 +937,49 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
                                         maxWidth: "78%",
                                         padding: "10px 14px",
                                         borderRadius: isUser ? "16px 16px 2px 16px" : "16px 16px 16px 2px",
-                                        background: isUser ? T.moss : T.card,
-                                        color: isUser ? T.paper : T.ink,
-                                        border: isUser ? "none" : `1px solid ${T.line}`,
+                                        background: isUser ? CHAT_C.userBg : CHAT_C.sproutBg,
+                                        color: isUser ? CHAT_C.userText : CHAT_C.sproutText,
+                                        border: isUser ? "1px solid rgba(0,0,0,0.06)" : `1px solid ${CHAT_C.sproutBorder}`,
                                         fontFamily: BODY,
                                         fontSize: 13,
-                                        lineHeight: "1.45",
-                                        boxShadow: "0 1px 3px rgba(0,0,0,0.05)"
+                                        lineHeight: "1.5",
+                                        boxShadow: "0 1px 3px rgba(27,43,34,0.06)"
                                     }}>
-                                        <div>{m.text}</div>
+                                        <div style={{ whiteSpace: "pre-line" }}>{m.text}</div>
+
+                                        {/* Rich inline action card button */}
+                                        {!isUser && m.action && (
+                                            <button
+                                                className="sprout-action-btn"
+                                                onClick={() => runAction(m)}
+                                                disabled={m.actionDone}
+                                                style={{
+                                                    marginTop: 10,
+                                                    width: "100%",
+                                                    padding: "8px 12px",
+                                                    borderRadius: 10,
+                                                    border: "none",
+                                                    background: m.actionDone ? "rgba(30,74,44,0.12)" : CHAT_C.userBg,
+                                                    color: m.actionDone ? CHAT_C.sproutText : "#FFFFFF",
+                                                    fontFamily: BODY,
+                                                    fontSize: 12,
+                                                    fontWeight: 700,
+                                                    cursor: m.actionDone ? "default" : "pointer",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    gap: 6,
+                                                }}
+                                            >
+                                                {m.actionDone ? "✓ Added to Today's Quests" : m.action.label}
+                                            </button>
+                                        )}
+
                                         <div style={{
                                             fontFamily: MONO,
                                             fontSize: 9,
-                                            opacity: 0.7,
-                                            marginTop: 4,
+                                            opacity: 0.65,
+                                            marginTop: 5,
                                             textAlign: isUser ? "right" : "left"
                                         }}>
                                             {m.timestamp}
@@ -821,35 +989,6 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
                             );
                         })}
 
-                        {/* Tech Suggestions on First/Empty Open */}
-                        {messages.length <= 1 && (
-                            <div style={{ marginTop: 8, display: "flex", flexDirection: "column", gap: 6 }}>
-                                <div style={{ fontFamily: MONO, fontSize: 10, color: T.subtext, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                                    Suggested Questions
-                                </div>
-                                {Tech_PROMPTS.map((prompt, i) => (
-                                    <button
-                                        key={i}
-                                        onClick={() => handleSend(prompt)}
-                                        style={{
-                                            textAlign: "left",
-                                            padding: "8px 12px",
-                                            borderRadius: 8,
-                                            background: T.card,
-                                            border: `1px solid ${T.line}`,
-                                            fontFamily: BODY,
-                                            fontSize: 12,
-                                            color: T.ink,
-                                            cursor: "pointer",
-                                            transition: "background 0.15s ease"
-                                        }}
-                                    >
-                                        💡 {prompt}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-
                         {/* Typing / Thinking Animation */}
                         {isLoading && (
                             <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
@@ -857,20 +996,57 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
                                 <div style={{
                                     padding: "10px 14px",
                                     borderRadius: "16px 16px 16px 2px",
-                                    background: T.card,
-                                    border: `1px solid ${T.line}`,
+                                    background: CHAT_C.sproutBg,
+                                    border: `1px solid ${CHAT_C.sproutBorder}`,
                                     display: "flex",
-                                    gap: 4,
+                                    gap: 6,
                                     alignItems: "center"
                                 }}>
-                                    <span className="typing-dot" style={{ background: T.moss }} />
-                                    <span className="typing-dot" style={{ background: T.moss }} />
-                                    <span className="typing-dot" style={{ background: T.moss }} />
+                                    <span style={{ fontFamily: BODY, fontSize: 12, color: CHAT_C.sproutText, opacity: 0.8 }}>
+                                        Sprout is thinking
+                                    </span>
+                                    <span style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                                        <span className="typing-dot" style={{ background: CHAT_C.userBg }} />
+                                        <span className="typing-dot" style={{ background: CHAT_C.userBg }} />
+                                        <span className="typing-dot" style={{ background: CHAT_C.userBg }} />
+                                    </span>
                                 </div>
                             </div>
                         )}
                         <div ref={messagesEndRef} />
                     </div>
+
+                    {/* Quick Prompt Chips */}
+                    <div className="sprout-chips" style={{
+                        padding: "8px 12px 0",
+                        background: T.card,
+                        borderTop: `1px solid ${T.line}`
+                    }}>
+                        {QUICK_PROMPTS.map((p, i) => (
+                            <button
+                                key={i}
+                                className="sprout-chip"
+                                onClick={() => handleSend(p.text)}
+                                disabled={isLoading}
+                                style={{
+                                    flexShrink: 0,
+                                    whiteSpace: "nowrap",
+                                    padding: "6px 12px",
+                                    borderRadius: 999,
+                                    background: CHAT_C.sproutBg,
+                                    border: `1px solid ${CHAT_C.sproutBorder}`,
+                                    color: CHAT_C.sproutText,
+                                    fontFamily: BODY,
+                                    fontSize: 11.5,
+                                    fontWeight: 600,
+                                    cursor: isLoading ? "not-allowed" : "pointer",
+                                }}
+                            >
+                                {p.emoji} {p.text}
+                            </button>
+                        ))}
+                    </div>
+
 
                     {/* Chat Input Bar */}
                     <form
@@ -878,7 +1054,7 @@ function SproutChat({ allEntries, todayTotal, goal, youWeekly }) {
                         style={{
                             padding: "10px 12px",
                             background: T.card,
-                            borderTop: `1px solid ${T.line}`,
+                            borderTop: "none",
                             display: "flex",
                             gap: 8,
                             alignItems: "center"
@@ -974,15 +1150,16 @@ function Trend({ value }) {
 }
 
 const TABS = [
-    { key: "dashboard", label: "Dashboard", icon: Home },
-    { key: "log", label: "Log Activity", icon: PlusCircle },
+    { key: "dashboard", label: "Dashboard", icon: Leaf },
+    { key: "log", label: "Log", icon: PlusCircle },
     { key: "trends", label: "Trends", icon: TrendIcon },
-    { key: "goals", label: "Goals & Benchmarks", icon: Target },
-    { key: "insights", label: "Insights", icon: Sparkles },
+    { key: "goals", label: "Goals", icon: Target },
+    { key: "insights", label: "Insights", icon: Lightbulb },
     { key: "badges", label: "Badges", icon: Award },
-    { key: "leaderboard", label: "Leaderboard", icon: Trophy },
-    { key: "team", label: "Team Report", icon: Building2 },
+    { key: "leaderboard", label: "Community", icon: Users },
+    { key: "team", label: "Team Impact", icon: Network },
 ];
+
 
 /* ---------------------------------------------------------------- */
 /* Premium motion + surface primitives                              */
@@ -1473,23 +1650,143 @@ function Walkthrough({ open, step, onStep, onClose, onDone }) {
 
 /* Page header used by every secondary tab */
 
-function PageHeader({ eyebrow, title, subtitle, actions }) {
+/* ---- Decorative motifs: thin illustrated paths + leaf shapes ---- */
+function Motif({ kind }) {
+    const T = useTheme();
+    const g = T.moss, l = T.lichen, o = T.olive, s = T.sky;
+    const leaf = (x, y, r, c, delay) => (
+        <path
+            key={`${x}-${y}`}
+            d="M0 0 C 9 -10, 24 -8, 26 2 C 20 12, 6 12, 0 0 Z"
+            transform={`translate(${x} ${y}) rotate(${r}) scale(0.62)`}
+            fill={c}
+            opacity="0.5"
+            style={{ animation: `ctLeafIn 620ms cubic-bezier(.22,1,.36,1) ${delay}ms both` }}
+        />
+    );
+    const line = (d, c, w = 1.4, delay = 0) => (
+        <path d={d} fill="none" stroke={c} strokeWidth={w} strokeLinecap="round" opacity="0.55"
+              className="ct-draw" style={{ animationDelay: `${delay}ms` }} />
+    );
+    const dot = (x, y, r, c, delay = 0) => (
+        <circle cx={x} cy={y} r={r} fill={c} opacity="0.55"
+                style={{ animation: `ctLeafIn 520ms ease ${delay}ms both` }} />
+    );
+
+    return (
+        <svg className="ct-ph-motif" viewBox="0 0 260 110" width="260" height="110" aria-hidden="true" focusable="false">
+            <defs>
+                <radialGradient id="phGlow" cx="60%" cy="40%" r="65%">
+                    <stop offset="0%" stopColor={g} stopOpacity="0.14" />
+                    <stop offset="100%" stopColor={g} stopOpacity="0" />
+                </radialGradient>
+            </defs>
+            <rect x="0" y="0" width="260" height="110" fill="url(#phGlow)" />
+
+            {kind === "log" && (
+                <>
+                    {line("M6 84 C 60 84, 66 40, 118 40 C 170 40, 178 70, 250 62", l, 1.5, 60)}
+                    {dot(46, 84, 3, g, 320)}{dot(118, 40, 3, g, 420)}{dot(196, 66, 3, o, 520)}
+                    {leaf(126, 22, -18, g, 480)}{leaf(64, 60, 24, l, 560)}{leaf(212, 40, -8, o, 640)}
+                </>
+            )}
+            {kind === "trends" && (
+                <>
+                    {line("M6 92 L 58 70 L 96 78 L 140 44 L 186 50 L 240 20", g, 1.6, 60)}
+                    {dot(58, 70, 2.6, g, 380)}{dot(140, 44, 2.6, g, 460)}{dot(240, 20, 3, o, 540)}
+                    {leaf(206, 30, -26, l, 560)}{leaf(160, 62, 12, g, 640)}
+                    {line("M6 100 C 70 96, 130 90, 250 84", l, 1, 220)}
+                </>
+            )}
+            {kind === "goals" && (
+                <>
+                    {line("M6 96 C 70 96, 40 56, 112 54 C 176 52, 168 26, 232 26", l, 1.5, 60)}
+                    {line("M232 26 L 232 76", o, 1.4, 420)}
+                    <path d="M232 26 L 258 34 L 232 44 Z" fill={o} opacity="0.6"
+                          style={{ animation: "ctLeafIn 560ms cubic-bezier(.22,1,.36,1) 620ms both" }} />
+                    {dot(112, 54, 3, g, 380)}
+                    {leaf(52, 66, 22, g, 520)}{leaf(150, 34, -14, l, 620)}
+                </>
+            )}
+            {kind === "insights" && (
+                <>
+                    {line("M14 88 C 60 88, 74 44, 122 44 C 168 44, 176 24, 236 24", l, 1.4, 60)}
+                    {dot(38, 66, 2.4, s, 300)}{dot(74, 34, 2, o, 360)}{dot(196, 60, 2.4, g, 420)}{dot(150, 20, 2, o, 480)}
+                    {line("M120 26 C 106 34, 106 54, 120 60 C 134 54, 134 34, 120 26 Z", g, 1.4, 260)}
+                    {line("M114 66 L 126 66 M116 72 L 124 72", o, 1.2, 520)}
+                    {leaf(178, 36, -20, g, 600)}{leaf(58, 74, 18, l, 680)}
+                </>
+            )}
+            {kind === "badges" && (
+                <>
+                    {line("M96 30 L 164 30 L 158 62 C 152 78, 108 78, 102 62 Z", o, 1.5, 60)}
+                    {line("M130 78 L 130 92 M110 96 L 150 96", g, 1.4, 340)}
+                    {line("M96 34 C 82 34, 82 54, 98 56 M164 34 C 178 34, 178 54, 162 56", l, 1.2, 420)}
+                    {dot(72, 26, 2, o, 460)}{dot(196, 44, 2.2, g, 520)}{dot(46, 62, 1.8, o, 560)}
+                    {leaf(186, 62, -18, g, 620)}{leaf(48, 32, 20, l, 700)}
+                </>
+            )}
+            {kind === "leaderboard" && (
+                <>
+                    {line("M14 96 C 74 92, 108 62, 154 46 C 196 32, 218 26, 248 22", l, 1.4, 60)}
+                    {dot(48, 84, 6, g, 300)}{line("M40 96 C 44 88, 52 88, 56 96", g, 1.4, 340)}
+                    {dot(122, 60, 7, o, 380)}{line("M113 74 C 118 64, 126 64, 131 74", o, 1.4, 420)}
+                    {dot(200, 34, 8, g, 460)}{line("M190 50 C 196 38, 204 38, 210 50", g, 1.4, 500)}
+                    {leaf(228, 58, -16, l, 620)}{leaf(76, 44, 22, l, 700)}
+                </>
+            )}
+            {kind === "team" && (
+                <>
+                    {line("M40 78 L 96 46 L 152 70 L 206 34", l, 1.3, 60)}
+                    {line("M96 46 L 108 92 M152 70 L 206 34", l, 1.3, 200)}
+                    {dot(40, 78, 5, g, 300)}{dot(96, 46, 5, o, 360)}{dot(152, 70, 5, g, 420)}{dot(108, 92, 4, l, 480)}
+                    {line("M206 34 C 218 20, 244 22, 246 38 C 238 54, 214 52, 206 34 Z", g, 1.5, 420)}
+                    {leaf(214, 60, -10, l, 640)}{leaf(58, 34, 18, l, 720)}
+                </>
+            )}
+        </svg>
+    );
+}
+
+function PageHeader({ eyebrow, title, subtitle, actions, motif }) {
     const T = useTheme();
     return (
         <Reveal>
-            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 18 }}>
-                <div>
+            <div
+                className="ct-ph"
+                style={{
+                    position: "relative",
+                    overflow: "hidden",
+                    display: "flex",
+                    alignItems: "flex-end",
+                    justifyContent: "space-between",
+                    gap: 16,
+                    flexWrap: "wrap",
+                    paddingBottom: 16,
+                    marginBottom: 18,
+                    borderBottom: `1px solid ${T.line}`,
+                }}
+            >
+                <div style={{ position: "relative", minWidth: 0, maxWidth: 640 }}>
                     {eyebrow && (
-                        <div style={{ fontFamily: MONO, fontSize: 10.5, letterSpacing: "0.14em", textTransform: "uppercase", color: T.moss, marginBottom: 6 }}>{eyebrow}</div>
+                        <div style={{ display: "inline-flex", alignItems: "center", gap: 7, marginBottom: 7 }}>
+                            <span style={{ width: 14, height: 1, background: T.moss, opacity: 0.6, display: "inline-block" }} />
+                            <span style={{ fontFamily: MONO, fontSize: 10.5, letterSpacing: "0.16em", textTransform: "uppercase", color: T.moss }}>{eyebrow}</span>
+                        </div>
                     )}
-                    <h1 style={{ fontFamily: DISPLAY, fontSize: 28, letterSpacing: "-0.02em", color: T.ink, margin: 0 }}>{title}</h1>
-                    {subtitle && <p style={{ fontFamily: BODY, fontSize: 13, color: T.subtext, margin: "6px 0 0 0", maxWidth: 620, lineHeight: 1.5 }}>{subtitle}</p>}
+                    <h1 className="ct-ph-title" style={{ fontFamily: DISPLAY, fontSize: 30, lineHeight: 1.16, letterSpacing: "-0.022em", color: T.ink, margin: 0 }}>{title}</h1>
+                    {subtitle && <p style={{ fontFamily: BODY, fontSize: 13, color: T.subtext, margin: "7px 0 0 0", maxWidth: 560, lineHeight: 1.55 }}>{subtitle}</p>}
                 </div>
-                {actions}
+
+                <div style={{ display: "flex", alignItems: "flex-end", gap: 14, marginLeft: "auto" }}>
+                    {motif && <Motif kind={motif} />}
+                    {actions}
+                </div>
             </div>
         </Reveal>
     );
 }
+
 
 /* Profile + settings drawer */
 function ProfilePanel({ open, onClose, profile, onChange, dark, onToggleDark, orgId, onOrgChange, earnedIds, youWeekly }) {
@@ -1654,15 +1951,17 @@ function TopNav({ activeTab, onTab, dark, onToggleDark, profile, onOpenProfile, 
             </div>
 
             <div
+                className="ct-tabrail"
                 style={{
                     display: "flex",
                     gap: 2,
                     flex: 1,
-                    flexWrap: "wrap",
                     padding: 4,
                     borderRadius: 999,
                     background: T.railBg,
                     border: `1px solid ${T.line}`,
+                    overflowX: "auto",
+                    scrollbarWidth: "none",
                 }}
             >
                 {TABS.map((tab) => {
@@ -1672,30 +1971,43 @@ function TopNav({ activeTab, onTab, dark, onToggleDark, profile, onOpenProfile, 
                         <button
                             key={tab.key}
                             onClick={() => onTab(tab.key)}
-                            className="ct-tab"
+                            className={`ct-tab${active ? " ct-tab-active" : ""}`}
+                            aria-current={active ? "page" : undefined}
                             style={{
+                                position: "relative",
                                 display: "flex",
                                 alignItems: "center",
-                                gap: 6,
-                                padding: "7px 13px",
+                                gap: 7,
+                                padding: "7px 14px",
+                                whiteSpace: "nowrap",
+                                flexShrink: 0,
                                 fontFamily: BODY,
                                 fontSize: 12.5,
                                 fontWeight: active ? 650 : 500,
+                                letterSpacing: active ? "0.005em" : 0,
                                 color: active ? "#F5FBF6" : T.subtext,
-                                background: active ? `linear-gradient(140deg, ${T.moss}, ${T.mossDark})` : "transparent",
+                                background: active
+                                    ? `linear-gradient(140deg, ${T.moss}, ${T.mossDark})`
+                                    : "transparent",
                                 border: "none",
                                 borderRadius: 999,
                                 cursor: "pointer",
-                                boxShadow: active ? `0 8px 18px -10px ${T.moss}` : "none",
-                                transition: "all 220ms cubic-bezier(.22,1,.36,1)",
+                                boxShadow: active
+                                    ? `0 1px 0 rgba(255,255,255,0.18) inset, 0 10px 20px -12px ${T.moss}`
+                                    : "none",
+                                transition:
+                                    "background 220ms cubic-bezier(.22,1,.36,1), color 200ms ease, box-shadow 220ms ease, transform 180ms cubic-bezier(.22,1,.36,1)",
                             }}
                         >
-                            <Icon size={14} strokeWidth={2} color={active ? "#F5FBF6" : T.subtext} />
+                            <span className="ct-tab-ico" style={{ display: "grid", placeItems: "center", transition: "transform 200ms cubic-bezier(.22,1,.36,1)" }}>
+                                <Icon size={active ? 15 : 14} strokeWidth={active ? 2.3 : 2} color={active ? "#F5FBF6" : T.subtext} />
+                            </span>
                             {tab.label}
                         </button>
                     );
                 })}
             </div>
+
 
             <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginLeft: "auto" }}>
                 {/* Language capsule */}
@@ -1882,7 +2194,7 @@ function DashboardHome({ activities, todayTotal, rank, quests, onNavigate, earne
                     <div style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) auto", gap: 16, alignItems: "center" }}>
                         <div style={{ minWidth: 0 }}>
                             <h1 style={{ fontFamily: DISPLAY, fontSize: 30, color: T.ink, margin: 0, letterSpacing: "-0.02em" }}>
-                                {t(greeting())}, <span style={{ color: T.moss }}>there</span> 🌿
+                                {t(greeting())}, <span style={{ color: T.moss }}>Eco Champ</span> 🌿
                             </h1>
                             <p style={{ fontFamily: BODY, fontSize: 13.5, color: T.subtext, margin: "6px 0 0" }}>
                                 Here's how you're doing on your sustainability journey today.
@@ -3619,12 +3931,15 @@ export default function Dashboard() {
         setVisited((prev) => new Set(prev).add(tab));
     };
 
+    const [bonusQuests, setBonusQuests] = useState([]);
+
     const quests = useMemo(() => ([
         { key: "log", label: "Log at least one activity today", done: todaysActivities.length > SEED_TODAY.length, tab: "log" },
         { key: "under-avg", label: `Stay under your ${fmt1(dailyAvg)} kg daily average`, done: todayTotal < dailyAvg, tab: "log" },
         { key: "trend", label: "Review this week's trend", done: visited.has("trends"), tab: "trends" },
         { key: "leaderboard", label: "Check the community leaderboard", done: visited.has("leaderboard"), tab: "leaderboard" },
-    ]), [todaysActivities.length, todayTotal, visited]);
+        ...bonusQuests,
+    ]), [todaysActivities.length, todayTotal, visited, bonusQuests]);
 
     const activeStreak = useMemo(() => {
         return todaysActivities.length > SEED_TODAY.length ? 7 : 6;
@@ -3710,7 +4025,7 @@ export default function Dashboard() {
     const [orgId, setOrgId] = useState(DEFAULT_ORG_ID);
     const [profile, setProfile] = useState({
         name: "Ditya",
-        email: "alex.rivera@carbontrack.app",
+        email: "dityaas@gmail.com",
         anonymous: false,
         digest: true,
         shareWithOrg: true,
@@ -3779,7 +4094,28 @@ export default function Dashboard() {
                 }
                 .ct-card:hover { box-shadow: 0 22px 48px -26px rgba(20,40,28,0.55); }
                 .ct-row:hover { background: rgba(127,150,132,0.09); }
-                .ct-tab:hover { color: inherit; transform: translateY(-1px); }
+                .ct-tabrail::-webkit-scrollbar { display: none; }
+                @media (max-width: 1340px) {
+                    .ct-tabrail { order: 3; flex-basis: 100% !important; }
+                }
+
+                .ct-tab:hover { color: inherit; transform: translateY(-1px); background: rgba(63,107,74,0.08); }
+                .ct-tab:hover .ct-tab-ico { transform: translateY(-1px) scale(1.12); }
+                .ct-tab-active:hover { transform: translateY(-1px); }
+                .ct-tab:focus-visible { outline: 2px solid rgba(63,107,74,0.45); outline-offset: 2px; }
+                @keyframes ctLeafIn {
+                    from { opacity: 0; transform: translateY(6px) scale(0.9); }
+                    to   { opacity: 0.5; transform: translateY(0) scale(1); }
+                }
+                .ct-ph-motif { opacity: 0.9; flex-shrink: 0; mask-image: linear-gradient(100deg, transparent, #000 34%, #000 82%, transparent); }
+                @media (max-width: 900px) {
+                    .ct-ph-motif { width: 180px !important; height: 76px !important; }
+                }
+                @media (max-width: 700px) {
+                    .ct-ph-motif { display: none !important; }
+                    .ct-ph-title { font-size: 24px !important; }
+                }
+
                 .ct-cta { position: relative; overflow: hidden; transition: transform 200ms cubic-bezier(.22,1,.36,1), box-shadow 200ms ease; }
                 .ct-cta:hover { transform: translateY(-2px); }
                 .ct-cta::after {
@@ -3880,9 +4216,11 @@ export default function Dashboard() {
                         {activeTab === "log" && (
                             <>
                                 <PageHeader
-                                    eyebrow="Capture"
-                                    title="Log activity"
-                                    subtitle="Add today's travel, energy, meals and waste. Every entry recalculates your footprint, streak and quests instantly."
+                                    eyebrow="Daily actions"
+                                    motif="log"
+                                    title="Every action counts."
+                                    subtitle="Record the choices that shape your footprint."
+
                                     actions={
                                         <ExportButton
                                             label="Export activities"
@@ -3923,9 +4261,11 @@ export default function Dashboard() {
                             <>
                                 <PageHeader
                                     eyebrow="Analytics"
-                                    title="Trends & breakdowns"
-                                    subtitle="How your emissions move across days, weeks and categories."
+                                    motif="trends"
+                                    title="See your footprint take shape."
+                                    subtitle="Discover patterns. Understand impact. Shape tomorrow."
                                 />
+
                                 <FilterBar
                                     filters={filters}
                                     onChange={setFilters}
@@ -3966,7 +4306,7 @@ export default function Dashboard() {
 
                         {activeTab === "goals" && (
                             <>
-                                <PageHeader eyebrow="Commitments" title="Goals" subtitle="Set a reduction target and track your progress against your baseline week." />
+                                <PageHeader eyebrow="Commitments" motif="goals" title="Turn intention into progress." subtitle="Set goals. Stay focused. Create a greener future." />
                                 {!ready ? <PanelSkeleton variant="leaderboard" /> : (
                                     <GoalsView
                                         goal={goal}
@@ -3980,7 +4320,7 @@ export default function Dashboard() {
 
                         {activeTab === "insights" && (
                             <>
-                                <PageHeader eyebrow="Intelligence" title="Insights" subtitle="Patterns, peer benchmarks and the highest-leverage changes for your footprint." />
+                                <PageHeader eyebrow="Intelligence" motif="insights" title="Make every number meaningful." subtitle="Data speaks. Insights guide. You decide." />
                                 <FilterBar filters={filters} onChange={setFilters} />
                                 {!ready ? <PanelSkeleton /> : filteredEntries.length === 0 ? (
                                     <GlassCard>
@@ -4000,7 +4340,7 @@ export default function Dashboard() {
 
                         {activeTab === "badges" && (
                             <>
-                                <PageHeader eyebrow="Recognition" title="Badges" subtitle="Milestones you've unlocked on the way to a lower-carbon routine." />
+                                <PageHeader eyebrow="Recognition" motif="badges" title="Celebrate how far you've come." subtitle="Every small change adds up." />
                                 {!ready ? <PanelSkeleton variant="badges" /> : (
                                     <BadgesView
                                         earnedIds={earnedBadgeIds}
@@ -4015,9 +4355,11 @@ export default function Dashboard() {
                             <>
                                 <PageHeader
                                     eyebrow="Community"
-                                    title="Leaderboard"
-                                    subtitle="Anonymous peer benchmarking — compare weekly footprints without exposing personal data."
+                                    motif="leaderboard"
+                                    title="Make an impact together."
+                                    subtitle="A little friendly competition goes a long way."
                                 />
+
                                 {!ready ? <PanelSkeleton variant="leaderboard" /> : (
                                     <Leaderboard
                                         youWeekly={youWeekly}
@@ -4030,10 +4372,19 @@ export default function Dashboard() {
                         )}
 
                         {activeTab === "team" && (
-                            !ready ? <PanelSkeleton /> : (
-                                <OrgReportView orgId={orgId} youWeekly={youWeekly} filters={filters} onFilters={setFilters} />
-                            )
+                            <>
+                                <PageHeader
+                                    eyebrow="Collective impact"
+                                    motif="team"
+                                    title="Your team's footprint, together."
+                                    subtitle="One team. One mission. One planet."
+                                />
+                                {!ready ? <PanelSkeleton /> : (
+                                    <OrgReportView orgId={orgId} youWeekly={youWeekly} filters={filters} onFilters={setFilters} />
+                                )}
+                            </>
                         )}
+
 
                     </div>
 
@@ -4044,7 +4395,16 @@ export default function Dashboard() {
                         todayTotal={todayTotal}
                         goal={goal}
                         youWeekly={youWeekly}
+                        activeStreak={activeStreak}
+                        userName={profile.name}
+                        onNavigate={goTo}
+                        onAddQuest={(label) => setBonusQuests((prev) => (
+                            prev.some((q) => q.label === label)
+                                ? prev
+                                : [...prev, { key: `sprout-${Date.now()}`, label, done: false, tab: "log" }]
+                        ))}
                     />
+
 
                     {toast && (
                         <div style={{
